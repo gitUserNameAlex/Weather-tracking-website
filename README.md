@@ -1,3 +1,3 @@
-This site was made with the help of:
+This site was made with the help of such resources as:
+
 Dark sky(api)
-Dev ed(Developer Edwin)

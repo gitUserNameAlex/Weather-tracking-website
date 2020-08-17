@@ -1,6 +1,6 @@
 window.addEventListener('load', () => {
-	let long;
-	let lat;
+	let long; //longitude
+	let lat; //latitude
 	let tempDescription = document.querySelector('.temp-description');
 	let tempDegree = document.querySelector('.temp-degree');
 	let locationTimezone = document.querySelector('.location-timezone');
@@ -12,6 +12,7 @@ window.addEventListener('load', () => {
 			long = position.coords.longitude;
 			lat = position.coords.latitude;
 
+			//DARK SKY API
 			const myProxy = 'https://cors-anywhere.herokuapp.com/';
 			const api = `${myProxy}https://api.darksky.net/forecast/5b223b07b34ee9d95f1ed5b336612ca5/${lat},${long}`;
 
@@ -20,23 +21,24 @@ window.addEventListener('load', () => {
 				return responce.json();
 			})
 			.then(data => {
-				console.log(data);
-				const { temperature, summary, icon } = data.currently;
 				//Сейчас поменяем значения температуры и тд из html кода на реальные с помощью API
 				//Set Elements from the API
+				console.log(data);
+				const { temperature, summary, icon } = data.currently;
 				tempDegree.textContent = temperature;
 				tempDescription.textContent = summary;
 				locationTimezone.textContent = data.timezone;
+				
 				//Трансформируем градусы по формуле
 				//Formula to transform degrees
 				let celsius  = (temperature - 32) * (5 / 9);
 
 				//Устанавливаем иконку погоды
-				//Set icon
+				//Set weather icon
 				setIcons(icon, document.querySelector('.icon'));
 
 				//меняем шкалу измерения с фаренгейта на цельсия
-				//Change temperature to Celsius/Farenheit
+				//Change temperature from Celsius to Farenheit or backwards
 				temperatureSection.addEventListener("click", () => {
 					if (temperatureSpan.textContent === "°F") {
 						temperatureSpan.textContent = "°C";

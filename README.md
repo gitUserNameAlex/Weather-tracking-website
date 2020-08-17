@@ -1,4 +1,4 @@
-This site was made with the help of:
+This page was made with the help of:
 
 Dark sky API
 
